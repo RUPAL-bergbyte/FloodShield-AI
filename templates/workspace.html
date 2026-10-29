@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07131f">
+
+    <meta
+        name="description"
+        content="FloodShield AI is a machine-learning research dashboard for flood-related risk scenario classification and geographic exploration."
+    >
+
+    <title>FloodShield AI | City Rescue Lab</title>
+
+    <!-- Leaflet map styles -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Main stylesheet -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">🌊</span>
+
+            <div>
+                <h1>FloodShield <span>AI</span></h1>
+                <p>THE 60-SECOND CITY RESCUE</p>
+            </div>
+        </div>
+
+        <div class="status">
+            <span></span>
+            ML MODEL LOADED
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+
+            <div class="hero-copy">
+                <p class="eyebrow">FLOOD INTELLIGENCE / 01</p>
+
+                <h2>
+                    Understand the risk.<br>
+                    <span>Prepare for the rise.</span>
+                </h2>
+
+                <p class="subtitle">
+                    A machine-learning research dashboard combining
+                    weather observations, scenario analysis and
+                    geographic exploration to support urban
+                    flood-resilience planning.
+                </p>
+
+                <a class="hero-link" href="#analysis">
+                    EXPLORE THE ANALYSIS ENGINE ↓
+                </a>
+            </div>
+
+            <div class="hero-visual">
+                <img
+                    src="https://images.unsplash.com/photo-1547683905-f686c993aae5?auto=format&fit=crop&w=1200&q=85"
+                    alt="Heavy rain and storm clouds over an urban environment"
+                >
+
+                <div class="image-caption">
+                    <span class="live-dot"></span>
+                    URBAN RESILIENCE LAB
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT DISCLAIMER -->
+        <section class="notice">
+            <strong>Research prototype:</strong>
+            Predictions classify labels from a small research dataset.
+            They are not validated real-world flood forecasts.
+        </section>
+
+
+        <!-- STEP 3A: PROJECT STATISTICS -->
+        <section class="stats">
+
+            <article class="stat-card">
+                <p>INTELLIGENCE ENGINE</p>
+                <h3>Random Forest</h3>
+                <span>
+                    Supervised machine-learning classification
+                </span>
+            </article>
+
+            <article class="stat-card">
+                <p>MODEL VALIDATION</p>
+                <h3>Research Model</h3>
+                <span>
+                    Performance should be reported from the latest
+                    test results
+                </span>
+            </article>
+
+            <article class="stat-card">
+                <p>CLASSIFICATION SCALE</p>
+                <h3>5 Levels</h3>
+                <span>
+                    Dataset risk labels ranging from 0 to 4
+                </span>
+            </article>
+
+        </section>
+
+
+        <!-- STEP 3B: PROJECT MISSION -->
+        <section class="mission-section">
+
+            <div class="mission-heading">
+                <p class="eyebrow">PROJECT MISSION / 01</p>
+
+                <h2>
+                    Turning weather data into
+                    <span>risk intelligence.</span>
+                </h2>
+
+                <p>
+                    FloodShield AI is a machine-learning research
+                    dashboard designed to explore how weather
+                    conditions can be used to classify flood-related
+                    risk scenarios.
+                </p>
+            </div>
+
+            <div class="mission-grid">
+
+                <article class="mission-card">
+                    <span class="mission-number">01</span>
+
+                    <h3>Weather Intelligence</h3>
+
+                    <p>
+                        Analyse rainfall, rainfall duration, wind speed,
+                        humidity and the selected weather event.
+                    </p>
+                </article>
+
+                <article class="mission-card">
+                    <span class="mission-number">02</span>
+
+                    <h3>Machine Learning</h3>
+
+                    <p>
+                        Process scenario inputs through a trained
+                        Random Forest model to obtain a dataset
+                        risk label.
+                    </p>
+                </article>
+
+                <article class="mission-card">
+                    <span class="mission-number">03</span>
+
+                    <h3>Geographic Exploration</h3>
+
+                    <p>
+                        Explore locations on an interactive map for
+                        geographic context. The map does not currently
+                        predict local flood zones.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- MAIN WORKSPACE -->
+        <section class="workspace" id="analysis">
+
+
+            <!-- WEATHER INPUT PANEL -->
+            <div class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">01 / ANALYSIS ENGINE</p>
+                        <h2>Weather scenario</h2>
+                    </div>
+
+                    <span class="badge">LIVE MODEL</span>
+                </div>
+
+
+                
+             <!-- LIVE WEATHER BUTTON -->
+             <div class="live-weather-section">
+
+             <button
+                  id="live-weather-button"
+                 type="button"
+                  >
+                 🌦️ FETCH WEATHER FOR SELECTED LOCATION
+             </button>
+
+             <p
+                 id="weather-status"
+                 role="status"
+                  aria-live="polite"
+             >
+              Select a location on the map, then fetch its current weather conditions.
+             </p>
+
+             </div>
+
+
+                <!-- PREDICTION FORM -->
+                <form id="prediction-form">
+
+                    <label for="rainfall">
+                        Rainfall (mm)
+                    </label>
+
+                    <input
+                        id="rainfall"
+                        name="rainfall"
+                        type="number"
+                        min="0"
+                        max="2000"
+                        step="any"
+                        value="80"
+                        required
+                    >
+
+
+                    <label for="duration">
+                        Rainfall duration (hours)
+                    </label>
+
+                    <input
+                        id="duration"
+                        name="duration"
+                        type="number"
+                        min="0.1"
+                        max="720"
+                        step="any"
+                        value="6"
+                        required
+                    >
+
+
+                    <label for="wind">
+                        Wind speed (km/h)
+                    </label>
+
+                    <input
+                        id="wind"
+                        name="wind"
+                        type="number"
+                        min="0"
+                        max="500"
+                        step="any"
+                        value="25"
+                        required
+                    >
+
+
+                    <label for="humidity">
+                        Humidity (%)
+                    </label>
+
+                    <input
+                        id="humidity"
+                        name="humidity"
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="any"
+                        value="80"
+                        required
+                    >
+
+
+                    <label for="event-type">
+                        Weather event
+                    </label>
+
+                    <select
+                        id="event-type"
+                        name="event_type"
+                        required
+                    >
+                        <option value="Heavy Rain">Heavy Rain</option>
+                        <option value="Flood">Flood</option>
+                        <option value="Storm">Storm</option>
+                        <option value="Storm Surge">Storm Surge</option>
+                        <option value="Typhoon">Typhoon</option>
+                    </select>
+
+
+                    <button id="predict-button" type="submit">
+                        RUN FLOOD RISK ANALYSIS →
+                    </button>
+
+                </form>
+
+                <p
+                    id="form-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </div>
+
+
+            <!-- MODEL RESULT PANEL -->
+            <div class="panel result-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">02 / MODEL OUTPUT</p>
+                        <h2>Risk assessment</h2>
+                    </div>
+
+                    <span class="result-icon">⌁</span>
+                </div>
+
+
+                <!-- INITIAL RESULT PLACEHOLDER -->
+                <div id="result-placeholder" class="empty-result">
+
+                    <div class="radar">⌖</div>
+
+                    <h3>Awaiting analysis</h3>
+
+                    <p>
+                        Submit a weather scenario to view the model's
+                        predicted dataset risk category.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 3C + 3D: PREDICTION AND SCENARIO SUMMARY -->
+                <div id="result" hidden>
+
+                    <p class="eyebrow">
+                        PREDICTED DATASET LABEL
+                    </p>
+
+                    <h2 id="risk-category">—</h2>
+
+
+                    <!-- RISK LEVEL METER -->
+                    <div
+                        class="risk-meter"
+                        role="progressbar"
+                        aria-label="Predicted risk level"
+                        aria-valuemin="0"
+                        aria-valuemax="4"
+                        aria-valuenow="0"
+                    >
+                        <div id="risk-bar"></div>
+                    </div>
+
+
+                    <!-- MODEL DESCRIPTION -->
+                    <p id="risk-description"></p>
+
+
+                    <!-- PROFESSIONAL SCENARIO SUMMARY -->
+                    <div class="scenario-summary">
+
+                        <p class="eyebrow">
+                            SCENARIO SUMMARY
+                        </p>
+
+                        <div class="output-grid">
+
+                            <div class="output-stat">
+                                <span>MODEL CLASS</span>
+                                <strong id="output-level">— / 4</strong>
+                            </div>
+
+                            <div class="output-stat">
+                                <span>RAINFALL INPUT</span>
+                                <strong id="output-rainfall">—</strong>
+                            </div>
+
+                            <div class="output-stat">
+                                <span>RAIN DURATION</span>
+                                <strong id="output-duration">—</strong>
+                            </div>
+
+                            <div class="output-stat">
+                                <span>EVENT TYPE</span>
+                                <strong id="output-event">—</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SAFETY DISCLAIMER -->
+                    <p class="small-note">
+                        This is a model classification, not a
+                        probability of flooding or an emergency
+                        warning. Use verified local forecasts and
+                        official alerts for real-world safety decisions.
+                    </p>
+
+                </div>
+
+
+                <!-- HOW IT WORKS -->
+                <div class="mini-divider"></div>
+
+                <p class="eyebrow">HOW IT WORKS</p>
+
+                <p class="small-note">
+                    Weather measurements → data preprocessing →
+                    trained Random Forest → predicted risk label.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- STEP 3E: INTERACTIVE MAP -->
+        <section class="panel map-panel">
+
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">03 / SPATIAL INTELLIGENCE</p>
+                    <h2>Urban resilience map</h2>
+                </div>
+
+                <span class="badge">EXPLORATION MAP</span>
+            </div>
+
+
+            <p class="small-note">
+                Explore geographic locations and switch between dark
+                and street-map styles. This map does not currently
+                display verified flood zones or location-specific
+                predictions.
+            </p>
+
+
+            <!-- LEAFLET MAP -->
+            <div
+                id="map"
+                role="region"
+                aria-label="Interactive geographic map"
+            ></div>
+
+
+            <!-- MAP INTERACTION STATUS -->
+            <p
+                id="map-status"
+                class="map-status"
+                role="status"
+                aria-live="polite"
+            >
+                Bhopal is the default reference point. Click anywhere
+                on the map to inspect coordinates or switch between
+                map styles.
+            </p>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+            <span>FLOODSHIELD AI</span>
+
+            <span>
+                Built for a smarter, more resilient urban future.
+            </span>
+        </footer>
+
+    </main>
+
+
+    <!-- JAVASCRIPT LIBRARIES -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- FLOODSHIELD AI APPLICATION SCRIPT -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

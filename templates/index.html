@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070d18">
+    <meta name="description" content="FloodShield AI is a research prototype exploring AI-assisted flood risk analysis, weather data, and map-based situational awareness.">
+    <title>FloodShield AI | Predict. Prepare. Protect.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+</head>
+
+<body>
+    <header class="container navbar">
+        <a class="brand" href="/" aria-label="FloodShield AI home">
+            <div class="brand-mark">⌁</div>
+            <div class="brand-name">FLOOD<span>SHIELD</span> AI</div>
+        </a>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            Research prototype
+        </div>
+    </header>
+
+    <main>
+        <section class="container hero">
+            <div class="hero-content">
+                <p class="eyebrow">AI-POWERED FLOOD RISK EXPLORATION</p>
+
+                <h1>
+                    Predict the risk.<br>
+                    Prepare the city.<br>
+                    <span class="accent">Protect lives.</span>
+                </h1>
+
+                <p class="hero-copy">
+                    Explore how machine learning, weather information, and
+                    interactive mapping can help communities understand
+                    potential flood-risk scenarios and support faster
+                    situational awareness.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="{{ url_for('workspace') }}">
+                        Launch Control Centre <span aria-hidden="true">↗</span>
+                    </a>
+                    <a class="btn btn-secondary" href="#technology">
+                        Explore the system ↓
+                    </a>
+                </div>
+
+                <p class="hero-note">
+                    Built for innovation in climate resilience and smarter cities.
+                </p>
+            </div>
+
+            <div class="visual-wrap">
+                <div class="visual-frame">
+                    <div class="visual-topline">
+                        <span class="tag">Flood intelligence</span>
+                        <span class="tag">Weather + ML</span>
+                    </div>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1547683905-f686c993aae5?auto=format&fit=crop&w=1200&q=85"
+                        alt="Floodwater surrounding an urban area"
+                        fetchpriority="high"
+                    >
+
+                    <div class="visual-caption">
+                        <h3>THE 60-SECOND CITY RESCUE</h3>
+                        <p>
+                            A research interface for exploring weather signals,
+                            risk classifications, and map-based context.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="floating-card">
+                    <small>System focus</small>
+                    <strong>AI + GIS</strong>
+                    <p>Risk exploration and spatial awareness</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="technology">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">THE TECHNOLOGY</p>
+                    <h2>Turning information into clearer decisions.</h2>
+                    <p>
+                        FloodShield AI brings multiple information sources
+                        into one interface, making a flood-risk scenario
+                        easier to explore and explain.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">⌘</div>
+                        <h3>Machine Learning</h3>
+                        <p>
+                            A Random Forest classification model analyses
+                            supplied scenario features and returns a risk
+                            category based on its training data.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">◉</div>
+                        <h3>Weather Intelligence</h3>
+                        <p>
+                            Weather information helps users explore conditions
+                            such as precipitation, humidity, and wind in the
+                            selected forecast context.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">⌖</div>
+                        <h3>Interactive Mapping</h3>
+                        <p>
+                            A map provides geographic context for exploring
+                            locations and understanding how location-based
+                            information can support situational awareness.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">HOW IT WORKS</p>
+                    <h2>From scenario to risk insight.</h2>
+                    <p>
+                        A simple workflow connects weather context,
+                        model-based classification, and a visual interface.
+                    </p>
+                </div>
+
+                <div class="workflow">
+                    <article class="workflow-item">
+                        <h3>Explore conditions</h3>
+                        <p>
+                            Review available weather information or enter
+                            scenario values in the analysis workspace.
+                        </p>
+                    </article>
+
+                    <article class="workflow-item">
+                        <h3>Run the model</h3>
+                        <p>
+                            Submit the selected inputs to the trained
+                            classification model for a predicted risk class.
+                        </p>
+                    </article>
+
+                    <article class="workflow-item">
+                        <h3>Review the result</h3>
+                        <p>
+                            Interpret the output alongside the available
+                            weather and map context, keeping uncertainty in mind.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="cta-panel">
+                    <div>
+                        <p class="eyebrow">READY TO EXPLORE?</p>
+                        <h2>Enter the FloodShield workspace.</h2>
+                        <p>
+                            Open the interactive dashboard to explore its
+                            weather panel, map, and machine-learning analysis.
+                        </p>
+                    </div>
+
+                    <a class="btn btn-primary" href="{{ url_for('workspace') }}">
+                        Open Workspace <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+
+                <p class="disclaimer">
+                    Important: FloodShield AI is an educational research
+                    prototype. Its model output is not a validated local
+                    flood forecast, an official warning, or a substitute
+                    for emergency services and government advisories.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container footer">
+        <p><strong>FLOODSHIELD AI</strong> · Predict. Prepare. Protect.</p>
+        <p>AI • Weather • Geospatial Awareness</p>
+    </footer>
+</body>
+</html>
